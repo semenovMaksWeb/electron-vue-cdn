@@ -11,6 +11,7 @@
 export default {
   name: 'pathCatalog',
   methods: {
+    // Изменить путь каталога
     clickPath (index) {
 
     }
