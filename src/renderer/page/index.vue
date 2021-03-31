@@ -3,7 +3,7 @@
     <div class="container">
       <header>
         <pathCatalog/>
-        <Catalog />
+        <Catalog :getCatalog="getCatalog" class="catalog-wrapper" />
       </header>
     </div>
   </div>
@@ -17,6 +17,14 @@ export default {
   components: {
     Catalog,
     pathCatalog
+  },
+  created () {
+    // this.$store.originalDispatch('setCatalog')
+  },
+  computed: {
+    getCatalog () {
+      return this.$store.getters['getCatalog']
+    }
   }
 }
 </script>
@@ -42,6 +50,9 @@ img{
 }
 .element-catalog-img{
   width: 15px;
+}
+.catalog-wrapper{
+  margin-top: 20px;
 }
 .element-catalog-wrapper{
   cursor: pointer;
