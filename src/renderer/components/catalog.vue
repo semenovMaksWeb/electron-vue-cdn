@@ -2,7 +2,9 @@
   <div class="catalog-block">
     <template v-for="(element, index) in getCatalog">
       <component
+
           @contextmenu="getMenu"
+          @dblclick="newsCatalog(index)"
           @click="setActive(index)"
           :key="element.id"
           :name="element.name"
@@ -19,11 +21,15 @@ import Directive from '@/components/directive'
 export default {
   name: 'catalog',
   methods: {
+    newsCatalog (index) {
+      console.log('newsCatalog')
+      this.$store.originalCommit('activeFalseCatalog', {index})
+    },
     getMenu () {
-
+      console.log('getMenu')
     },
     setActive (index) {
-      this.$store.originalDispatch('activeCatalog', {index, value: true})
+      this.$store.originalCommit('activeCatalog', {index})
     }
   },
   components: {
