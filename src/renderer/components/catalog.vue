@@ -3,9 +3,8 @@
     <template v-for="(element, index) in getCatalog">
       <template v-if="getCatalog !== null">
         <component
-            @contextmenu="getMenu"
-            @dblclick="newsCatalog(index)"
-            @click="setActive(index)"
+            @contextmenu="getMenu($event, index)"
+            @click="newsCatalog(index)"
             :key="element.id"
             :name="element.name"
             :is="element.type"
@@ -25,14 +24,19 @@ export default {
   name: 'catalog',
   methods: {
     newsCatalog (index) {
-      console.log('newsCatalog')
       this.$store.originalCommit('activeFalseCatalog', {index})
     },
-    getMenu () {
-      console.log('getMenu')
-    },
-    setActive (index) {
-      this.$store.originalCommit('activeCatalog', {index})
+    getMenu ($event, index) {
+      console.log($event.target.className)
+      this.$store.originalCommit('setCheck', true)
+      this.$store.originalCommit('setMenu',
+        {
+          index,
+          active: true,
+          top: $event.clientY,
+          left: $event.clientX
+        }
+      )
     }
   },
   components: {
