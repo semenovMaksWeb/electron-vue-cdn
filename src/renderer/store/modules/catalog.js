@@ -1,8 +1,8 @@
 // catalog путь каталога
+import axios from 'axios'
+import {apiUrl} from '../index'
 const state = {
-  catalog: [
-    {type: 'File', name: '1.png', active: false}
-  ]
+  catalog: []
 }
 
 const mutations = {
@@ -19,7 +19,37 @@ const mutations = {
   }
 }
 const actions = {
+  async setCatalog ({commit, dispatch, rootGetters}) {
+    const path = rootGetters['getPathString']
+    const {data} = await axios.get(`${apiUrl}/api/file/${path}`)
+    if (data.data.children) {
+      const res = await dispatch('mapCatalog', data.data.children)
+      commit('setCatalog', res)
+    } else {
+      commit('setCatalog', null)
+    }
 
+    //
+  },
+  // eslint-disable-next-line no-empty-pattern
+  mapCatalog ({}, data) {
+    const res = []
+    if (data.length > 0) {
+      data.forEach(elem => {
+        let type
+        if (elem.type === 'catalog') {
+          type = 'Directive'
+        } else {
+          type = 'File'
+        }
+        res.push({
+          type: type,
+          name: elem.name
+        })
+      })
+    }
+    return res
+  }
 }
 const getters = {
   getCatalog: s => s.catalog

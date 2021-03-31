@@ -1,17 +1,20 @@
 <template>
   <div class="catalog-block">
     <template v-for="(element, index) in getCatalog">
-      <component
-
-          @contextmenu="getMenu"
-          @dblclick="newsCatalog(index)"
-          @click="setActive(index)"
-          :key="element.id"
-          :name="element.name"
-          :is="element.type"
-          :class="{active: element.active}"
-      />
+      <template v-if="getCatalog !== null">
+        <component
+            @contextmenu="getMenu"
+            @dblclick="newsCatalog(index)"
+            @click="setActive(index)"
+            :key="element.id"
+            :name="element.name"
+            :is="element.type"
+        />
+      </template>
     </template>
+    <div v-if="getCatalog === null || getCatalog.length === 0 ">
+      Каталог пустой
+    </div>
   </div>
 </template>
 

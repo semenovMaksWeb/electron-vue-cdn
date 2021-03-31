@@ -3,8 +3,10 @@
     <div class="container">
       <header>
         <pathCatalog/>
-        <Catalog :getCatalog="getCatalog" class="catalog-wrapper" />
       </header>
+      <main>
+        <Catalog :getCatalog="getCatalog" class="catalog-wrapper" />
+      </main>
     </div>
   </div>
 </template>
@@ -18,8 +20,9 @@ export default {
     Catalog,
     pathCatalog
   },
-  created () {
-    // this.$store.originalDispatch('setCatalog')
+  async created () {
+    this.$store.originalCommit('setPath', ['public'])
+    await this.$store.originalDispatch('setCatalog')
   },
   computed: {
     getCatalog () {
@@ -52,6 +55,10 @@ img{
   width: 15px;
 }
 .catalog-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
   margin-top: 20px;
 }
 .element-catalog-wrapper{
@@ -61,24 +68,24 @@ img{
   align-items: center;
 
   margin-bottom: 10px;
-  &:before{
-    content: "";
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-right: 10px;
-
-    height: 10px;
-    width: 10px;
-
-    border: 1px solid #a9a9a9;
-    font-size: 12px;
-  }
-  &.active:before{
-    content: "\2714"
-  }
+  //&:before{
+  //  content: "";
+  //
+  //  display: flex;
+  //  align-items: center;
+  //  justify-content: center;
+  //
+  //  margin-right: 10px;
+  //
+  //  height: 10px;
+  //  width: 10px;
+  //
+  //  border: 1px solid #a9a9a9;
+  //  font-size: 12px;
+  //}
+  //&.active:before{
+  //  content: "\2714"
+  //}
 }
 .element-catalog-name{
   margin-left: 5px;

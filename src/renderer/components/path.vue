@@ -12,8 +12,10 @@ export default {
   name: 'pathCatalog',
   methods: {
     // Изменить путь каталога
-    clickPath (index) {
-
+    async clickPath (index) {
+      const link = this.getPath.slice(0, index + 1)
+      this.$store.originalCommit('setPath', link)
+      await this.$store.originalDispatch('setCatalog')
     }
   },
   computed: {
