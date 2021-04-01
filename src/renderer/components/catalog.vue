@@ -3,8 +3,8 @@
     <template v-for="(element, index) in getCatalog">
       <template v-if="getCatalog !== null">
         <component
+            :element="element"
             @contextmenu="getMenu($event, index)"
-            @click="newsCatalog(index)"
             :key="element.id"
             :name="element.name"
             :is="element.type"
@@ -23,9 +23,6 @@ import Directive from '@/components/directive'
 export default {
   name: 'catalog',
   methods: {
-    newsCatalog (index) {
-      this.$store.originalCommit('activeFalseCatalog', {index})
-    },
     getMenu ($event, index) {
       console.log($event.target.className)
       this.$store.originalCommit('setCheck', true)

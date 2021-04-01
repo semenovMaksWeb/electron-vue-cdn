@@ -17,6 +17,7 @@ const mutations = {
     store.menu.active = data.active
     store.menu.left = data.left
     store.menu.top = data.top
+    store.menu.index = data.index
   }
 
 }

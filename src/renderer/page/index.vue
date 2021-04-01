@@ -7,6 +7,8 @@
       <main>
         <Menu />
         <Catalog :getCatalog="getCatalog" class="catalog-wrapper" />
+        <add-catalog/>
+        <add-file/>
       </main>
     </div>
   </div>
@@ -16,9 +18,13 @@
 import pathCatalog from '@/components/path.vue'
 import Catalog from '@/components/catalog'
 import Menu from '@/components/menu'
+import AddFile from '@/components/addFile'
+import AddCatalog from '@/components/addCatalog'
 export default {
   name: 'PageIndex',
   components: {
+    AddCatalog,
+    AddFile,
     Menu,
     Catalog,
     pathCatalog
